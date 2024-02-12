@@ -10,20 +10,23 @@ class Calculator:
         start = time.time()
         result=None
         error=None
+        end=None
         try:
           result= operation(*args)
+          end = time.time()
         except Exception as e:
             error = e
-        CalcHistory.append({
-            'operation': operation.__name__,
-            'args': args,
-            "start": start,
-            "end": time.time(),
-            'result': result,
-            'error': error
-        })
+        CalcHistory.new(
+            operation= operation,
+            args= args,
+            start= start,
+            end= end,
+            result= result,
+            error= error
+        )
         return result
 
 
-
+CalcHistory.clear()
 print(Calculator()._operation(Operations.add, 1, 2,3,4,5,6,7,8,9,10)) # 55
+print(Calculator()._operation(Operations.power, 2, 3)) # 8
