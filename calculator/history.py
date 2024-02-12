@@ -1,10 +1,12 @@
 import json
 from operations import Operations
 from decimal import Decimal  
-
+from Interfaces.ICalcHistory import ICalcHistory
+from pydantic import ValidationError
+from Schemas.HistorySchema import CalculationHistory, OperationResult
 historyFile = 'history.json'
 
-class CalcHistory:
+class CalcHistory(ICalcHistory):
     def check_file()-> bool|None:
         try:
             with open(historyFile, 'r') as f:
@@ -114,7 +116,7 @@ class CalcHistory:
             print(e)
             return None
     @staticmethod
-    def new(operation:Operations,args: list, start: float, end: float, result: Decimal, error: Exception)-> bool:
+    def new(operation:Operations,args: list, start: float, end: float, result: Decimal|None, error: Exception|None)-> bool:
         try:            
             CalcHistory.append(data={
                 'operation': operation.__name__,
@@ -122,7 +124,7 @@ class CalcHistory:
                 "start": start,
                 "end": end,
                 'result': result,
-                'error': error
+                'error': error.__str__() if error else None
             })
             return True
         except Exception as e:

@@ -35,7 +35,7 @@ class Operations(IOperations):
         result = args[0]
         for arg in args[1:]:
             if arg == 0:
-                raise ZeroDivisionError
+                raise ZeroDivisionError("Cannot divide by zero")
             result /= arg
         return result
 
