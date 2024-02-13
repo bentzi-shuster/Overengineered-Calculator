@@ -55,9 +55,7 @@ class CalcHistory(ICalcHistory):
     def readJson()-> dict|None:
         try:
             read = CalcHistory.read()
-            opperation_result = CalculationHistory(calculations=[OperationResult(**i) for i in json.loads(read)])
-            jsondata=opperation_result.model_dump_json()
-            deserialized = CalcHistory.deserialize(jsondata)['calculations']
+            deserialized = CalcHistory.deserialize(read)
             return deserialized
         except Exception as e:
             print(e)
