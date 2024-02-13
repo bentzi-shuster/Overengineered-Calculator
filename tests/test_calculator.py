@@ -5,6 +5,6 @@ from calculator import Calculator
 
 
 oppertions = Operations().operations
-@pytest.mark.parametrize("test_input,expected,operations", [([1,2,3,4],10,oppertions["add"]),([1,2,3,4],-8,oppertions["subtract"]),([1,2],Decimal('0.5'),oppertions["divide"]),([1,2,3,4],24,oppertions["multiply"])])
+@pytest.mark.parametrize("test_input,expected,operations", [([1,2,3,4],10,oppertions["add"]),([1,2,3,4],-8,oppertions["subtract"]),([1,2],Decimal('0.5'),oppertions["divide"]),([1,2,3,4],24,oppertions["multiply"]),([2,3],8,oppertions["power"]),([16,2],4,oppertions["root"]),([5],120,oppertions["factorial"])])
 def test_calculator_operations(test_input:list, expected:Decimal,operations:callable):
    assert Calculator.__getattribute__(Calculator,operations.__name__.split("_")[1])(*test_input)==expected

@@ -12,7 +12,8 @@ class Operations(IOperations):
             'multiply': self._multiply,
             'divide': self._divide,
             'power': self._power,
-            'root': self._root
+            'root': self._root,
+            'factorial': self._factorial
         }
 
     @staticmethod
@@ -52,4 +53,14 @@ class Operations(IOperations):
         if args[0] < 0 or args[1] == 0:
             raise ValueError
         return args[0] ** (1 / args[1])
+    
+    @staticmethod
+    def _factorial(a: Decimal) -> Decimal:
+        # recursive factorial function
+        def fact(n):
+            if n == 0:
+                return 1
+            else:
+                return n * fact(n-1)
+        return fact(int(a))
     

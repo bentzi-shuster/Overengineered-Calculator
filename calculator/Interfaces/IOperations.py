@@ -37,3 +37,9 @@ class IOperations(object):
          make a root operation
         """
         pass
+
+    def _factorial(self):
+        """
+         make a factorial operation!
+        """
+        pass

@@ -43,4 +43,8 @@ class ICalculator(object):
         Takes the root of the first number with the second number as the root and so on
         """
         pass
-
+    def factorial(self, a: Decimal) -> Decimal:
+        """
+        Takes the factorial of the number
+        """
+        pass
