@@ -1,9 +1,9 @@
 import json
-from operations import Operations
+from calculator.operations import Operations
 from decimal import Decimal  
-from Interfaces.ICalcHistory import ICalcHistory
+from calculator.Interfaces.ICalcHistory import ICalcHistory
 from pydantic import ValidationError
-from Schemas.HistorySchema import CalculationHistory, OperationResult
+from calculator.Schemas.HistorySchema import CalculationHistory, OperationResult
 historyFile = 'history.json'
 
 class CalcHistory(ICalcHistory):
@@ -21,7 +21,7 @@ class CalcHistory(ICalcHistory):
 
     @staticmethod
     def serialize(data: dict)-> str:
-            dumps= json.dumps(data)
+            dumps= json.dumps(data, indent=2)
             return dumps
     
     @staticmethod
@@ -55,7 +55,9 @@ class CalcHistory(ICalcHistory):
     def readJson()-> dict|None:
         try:
             read = CalcHistory.read()
-            deserialized = CalcHistory.deserialize(read)
+            opperation_result = CalculationHistory(calculations=[OperationResult(**i) for i in json.loads(read)])
+            jsondata=opperation_result.model_dump_json()
+            deserialized = CalcHistory.deserialize(jsondata)['calculations']
             return deserialized
         except Exception as e:
             print(e)

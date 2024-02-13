@@ -1,7 +1,7 @@
 """
 if i did things right, to add a new operation, you just need to add a new function here
 """
-from Interfaces.IOperations import IOperations
+from calculator.Interfaces.IOperations import IOperations
 from decimal import Decimal  
 
 class Operations(IOperations):

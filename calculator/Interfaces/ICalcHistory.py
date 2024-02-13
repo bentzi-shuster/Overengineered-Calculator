@@ -1,4 +1,4 @@
-from operations import Operations
+from calculator.operations import Operations
 from decimal import Decimal  
 
 class ICalcHistory(object):
